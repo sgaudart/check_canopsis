@@ -55,7 +55,6 @@ while (<CHECKFD>)
 {
 	$line=$_;
 	chomp($line); # delete the carriage return
-  print "[DEBUG] checkline=$line\n" if $debug;
 	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
   {
       (@dataline) = split(';', $line);

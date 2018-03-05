@@ -91,6 +91,7 @@ sub check
 		{
     	$output = `$command`;
 		}
+		print "[DEBUG] output=$output\n" if $debug;
 
 		if ($expected eq "INFO")
 		{

@@ -17,6 +17,7 @@
 use strict;
 use warnings;
 use Getopt::Long;
+use IO::Socket;
 
 my ($verbose, $debug, $help, $line);
 my $checkfile;
@@ -24,6 +25,7 @@ my $inventory="inventory.conf";
 my ($cps_home,$amqp_vip,$amqp_port,$mongo_host1,$mongo_host2,$mongo_host3,$mongo_port,$influx_host,$influx_port);
 our $mongo_hosts;
 my @dataline;
+my @datacheckport;
 
 
 GetOptions (
@@ -50,8 +52,8 @@ while (<CHECKFD>)
 {
 	$line=$_;
 	chomp($line); # delete the carriage return
-  print "[DEBUG] checkline=$line---\n" if $debug;
-  if (($line ne "") && ($line !~/^#/))
+  print "[DEBUG] checkline=$line\n" if $debug;
+	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
   {
       (@dataline) = split(';', $line);
       check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
@@ -69,23 +71,30 @@ close CHECKFD;
 # du style : SUJET;LABEL;CMDE;OUTPUT à vérifier (c-a-d tu fais un regex dessus)
 sub check
 {
-	# 1 ARG : metric id
     my(@args) = @_;
     my $subject = $args[0];
     my $label = $args[1];
     my $command = $args[2];
-		my $command2;
     my $expected = $args[3]; # verifie si $output=$expect
+		my $output;
 
-    $command =~ s/(\$\w+)/$1/eeg;
-		print "[DEBUG] command=$command\n" if $debug;
-		#print "[DEBUG] mongo_hosts=$mongo_hosts\n" if $debug;
-    my $output = `$command`;
+    if ($command =~ /check_port/)
+		{
+      $command =~ s/check_port //; # on enleve check_port
+			print "[DEBUG] command=$command\n" if $debug;
+			$output=check_port($command);
+		}
+		else
+		{
+			$command =~ s/(\$\w+)/$1/eeg;
+			print "[DEBUG] command=$command\n" if $debug;
+    	$output = `$command`;
+		}
 
 		if ($expected eq "INFO")
 		{
-			 # AFFICHAGE SEULEMENT DU CHECK
-			 printf("%-12s | %-35s %-10s\n",$subject,$label,$output);
+			# AFFICHAGE SEULEMENT DU CHECK
+			printf("%-12s | %-35s %-10s\n",$subject,$label,$output);
 		}
     else
 		{
@@ -98,4 +107,32 @@ sub check
        	  printf("%-12s | %-35s %-10s\n",$subject,$label,"KO");
     	 }
 	  }
+}
+
+
+sub check_port
+{
+	  my(@args) = @_;
+    my @datacheckport;
+		(@datacheckport) = split(' ', $args[0]);
+		my $host = $datacheckport[0];
+		my $port = $datacheckport[1];
+
+		my $sock = IO::Socket::INET->new(
+    	PeerAddr => $host,
+    	PeerPort => $port,
+    	Proto    => 'tcp',
+    	Timeout  => 3
+			);
+
+		if($sock)
+		{
+    	return 1;
+		}
+		else
+		{
+			return 0;
+		}
+
+		close $sock or die "close: $!";
 }

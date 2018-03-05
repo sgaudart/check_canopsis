@@ -36,7 +36,9 @@ GetOptions (
 "help" => \$help) # flag
 or die("Error in command line arguments\n");
 
+###############################
 # OPEN inventory file
+###############################
 print "[DEBUG] OPEN file $inventory\n" if $debug;
 open (INVENTORY, "$inventory") or die "Can't open file  : $inventory\n" ; # reading
 my $hostdata = join "", <INVENTORY>;
@@ -44,8 +46,9 @@ close INVENTORY;
 eval $hostdata;
 die "Couldn't interpret the configuration file ($inventory) that was given.\nError details follow: $@\n" if $@;
 
-
+###############################
 # OPEN checkfile
+###############################
 print "[DEBUG] OPEN file $checkfile\n" if $debug;
 open (CHECKFD, "$checkfile") or die "Can't open file  : $checkfile\n" ; # reading
 while (<CHECKFD>)
@@ -100,7 +103,7 @@ sub check
 		{
     	 if ($output =~ /$expected/)
     	 {
-       	  printf("%-12s | %-35s %-10s\n",$subject,$label,"OK");
+       	  printf("%-12s | %-35s %-10s\n",$subject,$label,"OK") if $verbose;
     	 }
     	 else
     	 {
@@ -133,6 +136,5 @@ sub check_port
 		{
 			return 0;
 		}
-
 		close $sock or die "close: $!";
 }

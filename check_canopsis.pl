@@ -81,16 +81,15 @@ sub check
     my $expected = $args[3]; # verifie si $output=$expect
 		my $output;
 
+		$command =~ s/(\$\w+)/$1/eeg; # eval variables
+		print "[DEBUG] command=$command\n" if $debug;
     if ($command =~ /check_port/)
 		{
       $command =~ s/check_port //; # on enleve check_port
-			print "[DEBUG] command=$command\n" if $debug;
 			$output=check_port($command);
 		}
 		else
 		{
-			$command =~ s/(\$\w+)/$1/eeg;
-			print "[DEBUG] command=$command\n" if $debug;
     	$output = `$command`;
 		}
 

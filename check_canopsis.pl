@@ -57,7 +57,7 @@ while (<CHECKFD>)
 	chomp($line); # delete the carriage return
 	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
   {
-      (@dataline) = split(';', $line);
+      (@dataline) = split(',', $line); # ";" => "," changed
       check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
   }
 

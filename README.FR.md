@@ -19,25 +19,31 @@
 - auteur : sgaudart@capensis.fr
 - date : 05/03/2018
 
-Canopsis est un hyperviseur proposé par la société Capensis.
+[Canopsis](http://www.canopsis.com/) est un hyperviseur édité par la société [Capensis](https://www.capensis.fr/).
 
 ## Objectif
 
-Le script check_canopsis.pl permet de vérifier la bonne installation de Canopsis et également de sa disponibilité.
+Le script `check_canopsis.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
+Le script prend en entrée 2 fichiers de configuration :
+- un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise qq infos sur le produit canopsis (chemin d'install,hostname,port)
+- un fichier de checks ([checks.conf](checks.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
 
-## Version
-
-Testé avec Canopsis 2.4.X et 2.5.X
+En retour, vous aurez le résultat des vérifications définies dans `checks.conf`.
 
 
-## Support
+### Version
+
+Testé avec Canopsis 2.4.X et 2.5.X sur du CentOS7.
+
+
+### Support
 
 - Support de SELinux : NON
 - Support d'un changement de datadir : NON
 - Support d'un proxy (si requête HTTP) : NON
 
 
-## Périmètre
+### Périmètre
 
 Le script check_canopsis.pl s'exécute sur les noeuds canopsis (qui porte les moteurs et/ou bus AMQP et/ou serviceweb)
 
@@ -77,7 +83,7 @@ screenshot ici
 
 ## Utilisation
 
-Je vois que les tests KO :
+Pour ne voir que les tests KO :
 ```
 ./check_canopsis.pl --checkfile checks.conf --inventory inventory.conf
 ```

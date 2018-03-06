@@ -2,12 +2,12 @@
 #======================================================================
 # Auteur : sgaudart@capensis.fr
 # Date   : 19/02/2018
-# But    : This script check canopsis installation
+# But    : This script check canopsis installation and behavior
 #
 # INPUT :
-#          2 config file : one for the hostname (mongo, rabbitmq...) + one for list of checks
+#          2 config file : one for the hostname+port (mongo, rabbitmq...) + one for list of checks
 # OUTPUT :
-#          result of checks
+#          result of checks (OK|KO)
 #
 #======================================================================
 #   Date      Version    Auteur       Commentaires
@@ -96,6 +96,7 @@ sub check
 		if ($expected eq "INFO")
 		{
 			# AFFICHAGE SEULEMENT DU CHECK
+			chomp($output); # delete the carriage return
 			printf("%-12s | %-35s %-10s\n",$subject,$label,$output);
 		}
     else

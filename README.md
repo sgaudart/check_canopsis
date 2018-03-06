@@ -1,12 +1,12 @@
-# Verification de Canopsis 
+# Verification de Canopsis
 
 ## Sommaire
 
 1. [Introduction](#introduction)
 2. [Objectif](#objectif)
-     '1. [Version](#version)
-     '2. [Support](#support)
-     '3. [Périmètre](#périmètre)
+   1. [Version](#version)
+   2. [Support](#support)
+   3. [Périmètre](#périmètre)
 4. [Prérequis](#prérequis)
 4. [Installation](#installation)
 5. [Configuration](#configuration)
@@ -26,51 +26,72 @@ Canopsis est un hyperviseur proposé par la société Capensis.
 Le script check_canopsis.pl permet de vérifier la bonne installation de Canopsis et également de sa disponibilité.
 
 ## Version
-Préciser ici la ou les versions cibles couvertes par ce document, peut être un historique des version précédentes..etc
+
+Testé avec Canopsis 2.4.X et 2.5.X
+
 
 ## Support
 
-- Support de SELinux : OUI/NON
-- Support d'un changement de datadir : OUI/NON
-- Support d'un proxy (si requête HTTP) : OUI/NON
+- Support de SELinux : NON
+- Support d'un changement de datadir : NON
+- Support d'un proxy (si requête HTTP) : NON
+
 
 ## Périmètre
-Décrire le périmètre sur lequel peut s'appliquer la procédure.
-Préciser ici tous les hostnames ou groupes d'hostname concernés par la procédure :
--
--
+
+Le script check_canopsis.pl s'exécute sur les noeuds canopsis (qui porte les moteurs et/ou bus AMQP et/ou serviceweb)
+
 
 ## Prérequis
-qu'est-ce qu'il faut obligatoirement avant d'appliquer la procédure.
-Un tableau ici sera pas mal du style :
 
-| Type    | Nom        | Version |
+| Type    | Nom         | Version |
 |---------|-------------|---------|
-| système | CentOS      | 7      |
-| système | package gcc | 1.2    |
-| système | python      | 2 ou 3  |
-| python  | lib pywinrm | 0.2.2  |
+| système | perl        | 5.X     |
+| perl    | lib Getopt::Long |    |
+| perl    | lib IO::Socket   |    |
+
 
 ## Installation
-ce qu'il faut faire, par exemple :
-etape 1 :
-etape 2 :
-étape 3 : ...etc
+
+```
+git clone https://github.com/sgaudart/check_canopsis.git
+```
+
 
 ## Configuration
-ce qu'il faut faire, par exemple :
-etape 1 :
-etape 2 :
-étape 3 : ...etc
+
+Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-dessous si nécessaire :
+- $cps_home    = "/opt/canopsis"
+- $amqp_vip    = "127.0.0.1" # put VIP here
+- $amqp_port   = 5672
+- $mongo_host1 = "mongo1"
+- $mongo_host2 = "mongo2" # si cluster mongo
+- $mongo_host3 = "mongo3" # si cluster mongo
+- $mongo_port   = 27017
+- $influx_host = "influx_hostname"
+- $influx_port = 4444
+
 
 ## Le résultat
 screenshot ici
 
 ## Utilisation
-Quelques exemples de commandes
+
+Je vois que les tests KO :
+```
+./check_canopsis.pl --checkfile checks.conf --inventory inventory.conf
+```
+
+
+Je vois le résultat de tous les tests :
+```
+./check_canopsis.pl --checkfile checks.conf --inventory inventory.conf --verbose
+```
+
 
 ## Vérification
 Quelles commandes pour vérifier si l'installation s'est bien déroulé ?
+
 
 ## Problèmes connus
 ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec le sujet

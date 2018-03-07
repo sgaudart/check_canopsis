@@ -89,7 +89,7 @@ sub check
 		}
 		else
 		{
-    	$output = `$command`;
+    	$output = `$command` or print "c'est de la merde cette commande $command\n";
 		}
 		print "[DEBUG] output=$output\n" if $debug;
 

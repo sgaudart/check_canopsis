@@ -103,11 +103,11 @@ sub check
 		{
     	 if ($output =~ /$expected/)
     	 {
-       	  printf("%-12s | %-35s %-10s\n",$subject,$label,"OK") if $verbose;
+       	  printf("%-12s | %-45s %-10s\n",$subject,$label,"OK") if $verbose;
     	 }
     	 else
     	 {
-       	  printf("%-12s | %-35s %-10s\n",$subject,$label,"KO");
+       	  printf("%-12s | %-45s %-10s\n",$subject,$label,"KO");
     	 }
 	  }
 }

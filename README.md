@@ -24,10 +24,10 @@
 
 ## Objectif
 
-Le script `check_canopsis.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
+Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
 Le script prend en entrée 2 fichiers de configuration :
 - un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise qq infos sur le produit canopsis (chemin d'install,hostname,port)
-- un fichier de checks ([checks.conf](checks.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
+- un fichier de checks ([check_*.conf](check_cano255.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
 
 En retour, vous aurez le résultat des vérifications définies dans `checks.conf`.
 
@@ -46,7 +46,7 @@ Testé avec Canopsis 2.4.X et 2.5.X sur du CentOS7.
 
 ### Périmètre
 
-Le script check_canopsis.pl s'exécute sur les noeuds canopsis (qui porte les moteurs et/ou bus AMQP et/ou serviceweb)
+Le script check_everything.pl s'exécute sur les noeuds canopsis (qui porte les moteurs et/ou bus AMQP et/ou serviceweb)
 
 
 ## Prérequis
@@ -69,12 +69,15 @@ git clone https://github.com/sgaudart/check_canopsis.git
 
 Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-dessous si nécessaire :
 - $cps_home    = "/opt/canopsis"
+
 - $amqp_vip    = "127.0.0.1" # put VIP here
 - $amqp_port   = 5672
+
 - $mongo_host1 = "mongo1"
 - $mongo_host2 = "mongo2" # si cluster mongo
 - $mongo_host3 = "mongo3" # si cluster mongo
 - $mongo_port   = 27017
+
 - $influx_host = "influx_hostname"
 - $influx_port = 4444
 
@@ -86,13 +89,13 @@ screenshot ici
 
 Pour ne voir que les tests KO :
 ```
-./check_canopsis.pl --checkfile checks.conf --inventory inventory.conf
+./check_everything.pl --checkfile check_cano255.conf --inventory inventory.conf
 ```
 
 
 Je vois le résultat de tous les tests :
 ```
-./check_canopsis.pl --checkfile checks.conf --inventory inventory.conf --verbose
+./check_everything.pl --checkfile check_cano255.conf --inventory inventory.conf --verbose
 ```
 
 

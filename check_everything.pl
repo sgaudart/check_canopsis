@@ -2,10 +2,10 @@
 #======================================================================
 # Auteur : sgaudart@capensis.fr
 # Date   : 19/02/2018
-# But    : This script check canopsis installation and behavior
+# But    : this script allows you to check anything locally via system commands described in a conf file
 #
 # INPUT :
-#          2 config file : one for the hostname+port (mongo, rabbitmq...) + one for list of checks
+#          2 config file : one for the hostname+port + one for list of checks
 # OUTPUT :
 #          result of checks (OK|KO)
 #
@@ -19,7 +19,7 @@ use warnings;
 use Getopt::Long;
 use IO::Socket;
 
-my ($verbose, $debug, $help, $line);
+my ($verbose, $debug, $help, $skip, $line);
 my $checkfile;
 my $inventory="inventory.conf";
 my ($cps_home,$amqp_vip,$amqp_port,$mongo_host1,$mongo_host2,$mongo_host3,$mongo_port,$influx_host,$influx_port);
@@ -33,6 +33,7 @@ GetOptions (
 "inventory=s" => \$inventory, # string
 "verbose" => \$verbose, # flag
 "debug" => \$debug, # flag
+"skip=s" => \$skip, # can skip specified checks
 "help" => \$help) # flag
 or die("Error in command line arguments\n");
 
@@ -58,7 +59,10 @@ while (<CHECKFD>)
 	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
   {
       (@dataline) = split(',', $line); # ";" => "," changed
-      check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
+			if ($line !~ /$skip/)
+			{
+      	check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
+			}
   }
 
 }

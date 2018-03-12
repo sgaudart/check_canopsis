@@ -19,7 +19,8 @@ use warnings;
 use Getopt::Long;
 use IO::Socket;
 
-my ($verbose, $debug, $help, $skip, $line);
+my ($verbose, $debug, $help, $line);
+my $skip = "";
 my $checkfile;
 my $inventory="inventory.conf";
 my ($cps_home,$amqp_vip,$amqp_port,$mongo_host1,$mongo_host2,$mongo_host3,$mongo_port,$influx_host,$influx_port);
@@ -59,7 +60,7 @@ while (<CHECKFD>)
 	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
   {
       (@dataline) = split(',', $line); # ";" => "," changed
-			if ($line !~ /$skip/)
+			if (($skip eq "") || ($line !~ /$skip/))
 			{
       	check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
 			}

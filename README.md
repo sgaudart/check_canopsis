@@ -27,9 +27,9 @@
 Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
 Le script prend en entrée 2 fichiers de configuration :
 - un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise qq infos sur le produit canopsis (chemin d'install,hostname,port)
-- un fichier de checks ([check_*.conf](check_cano255.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
+- un fichier de checks ([cano*.conf](canopsis255.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
 
-En retour, vous aurez le résultat des vérifications définies dans `checks.conf`.
+En retour, vous aurez le résultat des vérifications définies dans `canopsis*.conf`.
 
 
 ### Version
@@ -51,11 +51,11 @@ Le script check_everything.pl s'exécute sur les noeuds canopsis (qui porte les 
 
 ## Prérequis
 
-| Type    | Nom         | Version |
-|---------|-------------|---------|
-| système | perl        | 5.X     |
-| perl    | lib Getopt::Long |    |
-| perl    | lib IO::Socket   |    |
+| Type    | Nom              | Version |
+|---------|------------------|---------|
+| système | perl             | 5.X     |
+| perl    | lib Getopt::Long |         |
+| perl    | lib IO::Socket   |         |
 
 
 ## Installation
@@ -89,13 +89,17 @@ screenshot ici
 
 Pour ne voir que les tests KO :
 ```
-./check_everything.pl --checkfile check_cano255.conf --inventory inventory.conf
+./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf
 ```
-
 
 Je vois le résultat de tous les tests :
 ```
-./check_everything.pl --checkfile check_cano255.conf --inventory inventory.conf --verbose
+./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf --verbose
+```
+
+Je vois le résultat de tous les tests sauf INFLUXDB :
+```
+./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf --verbose --skip INFLUXDB
 ```
 
 

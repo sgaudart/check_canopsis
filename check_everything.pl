@@ -23,6 +23,8 @@ my ($verbose, $debug, $help, $line);
 my $skip = "";
 my $checkfile;
 my $inventory="inventory.conf";
+my ($cps_home,$amqp_vip,$amqp_port,$mongo_host1,$mongo_host2,$mongo_host3,$mongo_port,$influx_host,$influx_port);
+our $mongo_hosts;
 
 my @dataline;
 my @datacheckport;

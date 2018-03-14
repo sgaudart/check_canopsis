@@ -23,8 +23,7 @@ my ($verbose, $debug, $help, $line);
 my $skip = "";
 my $checkfile;
 my $inventory="inventory.conf";
-my ($cps_home,$amqp_vip,$amqp_port,$mongo_host1,$mongo_host2,$mongo_host3,$mongo_port,$influx_host,$influx_port);
-our $mongo_hosts;
+
 my @dataline;
 my @datacheckport;
 
@@ -120,26 +119,39 @@ sub check
 
 sub check_port
 {
-	  my(@args) = @_;
-    my @datacheckport;
-		(@datacheckport) = split(' ', $args[0]);
-		my $host = $datacheckport[0];
-		my $port = $datacheckport[1];
+   my(@args) = @_;
+   my @datacheckport;
+   (@datacheckport) = split(' ', $args[0]);
+   my $host = $datacheckport[0];
+   my $port = $datacheckport[1];
 
-		my $sock = IO::Socket::INET->new(
-    	PeerAddr => $host,
-    	PeerPort => $port,
-    	Proto    => 'tcp',
-    	Timeout  => 3
-			);
+   my $sock = IO::Socket::INET->new(
+      PeerAddr => $host,
+      PeerPort => $port,
+      Proto    => 'tcp',
+      Timeout  => 3
+   );
 
-		if($sock)
-		{
-    	return 1;
-		}
-		else
-		{
-			return 0;
-		}
-		close $sock or die "close: $!";
+   if($sock)
+   {
+      return 1;
+   }
+   else
+   {
+      return 0;
+   }
+   close $sock or die "close: $!";
+}
+
+
+sub AddSpaceToString
+{
+   my $input = $_[0]; # ARG1 : string
+   my $total=  $_[1]; # ARG2 : longueur totale
+   my $size=length($input);
+
+   my $spaces = " " x ($total-$size);
+   $input = $input . $spaces;
+
+   return $input;
 }

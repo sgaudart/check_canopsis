@@ -51,11 +51,12 @@ Le script check_everything.pl s'exécute sur les noeuds canopsis (qui porte les 
 
 ## Prérequis
 
-| Type    | Nom              | Version |
-|---------|------------------|---------|
-| système | perl             | 5.X     |
-| perl    | lib Getopt::Long |         |
-| perl    | lib IO::Socket   |         |
+| Type    | Nom                 | Version |
+|---------|---------------------|---------|
+| système | perl                | 5.X     |
+| perl    | lib Getopt::Long    |         |
+| perl    | lib IO::Socket      |         |
+| perl    | lib Term::ANSIColor |         |
 
 
 ## Installation
@@ -83,7 +84,40 @@ Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-de
 
 
 ## Le résultat
-screenshot ici
+
+Un exemple ici :
+
+```console
+[root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis2510_ha.conf --verbose
+CANOPSIS     | Version de Canopsis
+CANOPSIS     | Présence du compte canopsis                      OK
+CANOPSIS     | selinux désactivé                                OK
+RABBITMQ     | Disponibilité du port 5672                       OK
+RABIITMQ     | Vérification contenu etc/amqp.conf               OK
+WEBSERVICE   | Disponibilité du port 8082                       OK
+WEBSERVICE   | Présence Login dans la page                      OK
+WEBSERVICE   | Détection d'erreurs dans les logs                OK
+WEBSERVICE   | Présence brique querybuilder                     OK
+WEBSERVICE   | Présence brique weather                          OK
+WEBSERVICE   | Présence brique listalarm                        OK
+WEBSERVICE   | Présence brique timeline                         OK
+ENGINES      | Disponibilité des engines                        OK
+MONGODB      | Disponibilité moteur#1                           OK
+MONGODB      | Disponibilité moteur#2                           OK
+MONGODB      | Disponibilité moteur#3                           OK
+MONGODB      | Vérification etc/common/mongo_store.conf         OK
+SUPERVISOR   | Disponibilité du daemon                          OK
+SUPERVISOR   | Version                                          3.3.3
+SUPERVISOR   | Fichiers dans etc/supervisor.d/                  OK
+SUPERVISOR   | Présence cleaner dans amqp2engines.conf          OK
+SUPERVISOR   | Présence filter dans amqp2engines.conf           OK
+SUPERVISOR   | Présence schedule dans amqp2engines.conf         OK
+SUPERVISOR   | Controle BACKEND dans hypcontrol.conf            OK
+SUPERVISOR   | Controle MIDDLEWARE dans hypcontrol.conf         OK
+SUPERVISOR   | Controle FRONTEND dans hypcontrol.conf           OK
+INFLUXDB     | Disponibilité du moteur                          OK
+INFLUXDB     | Controle storage.conf                            OK
+```
 
 ## Utilisation
 

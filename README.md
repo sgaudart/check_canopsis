@@ -26,8 +26,8 @@
 
 Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
 Le script prend en entrée 2 fichiers de configuration :
-- un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise qq infos sur le produit canopsis (chemin d'install,hostname,port)
-- un fichier de checks ([cano*.conf](canopsis255.conf)) qui répertorie les vérifications à faire sur Canopsis (à faire évoluer !!)
+- un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise comment a été installé canopsis (**vous devez modifier ce fichier**)
+- un fichier de checks ([cano*.conf](canopsis255.conf)) qui répertorie les vérifications à faire sur Canopsis (fourni dans ce dépot)
 
 En retour, vous aurez le résultat des vérifications définies dans `canopsis*.conf`.
 

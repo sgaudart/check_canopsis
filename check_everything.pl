@@ -110,13 +110,17 @@ sub check
 		{
     	 if ($output =~ /$expected/)
     	 {
-       	  printf("%-12s | %-50s",$subject,$label) if $verbose;
+          PrintStringWithSpaces($suject,12) if $verbose;
+					PrintStringWithSpaces($label,50) if $verbose;
+					#printf("%-12s | %-50s",$subject,$label) if $verbose;
 					print color('green') if $verbose;
 					print "OK\n" if $verbose
     	 }
     	 else
     	 {
-       	  printf("%-12s | %-50s",$subject,$label);
+				  PrintStringWithSpaces($suject,12);
+				  PrintStringWithSpaces($label,50);
+					#printf("%-12s | %-50s",$subject,$label);
 					print color('red');
 					print "KO\n"
     	 }
@@ -152,7 +156,7 @@ sub check_port
 }
 
 
-sub AddSpaceToString
+sub PrintStringWithSpaces
 {
    my $input = $_[0]; # ARG1 : string
    my $total=  $_[1]; # ARG2 : longueur totale
@@ -161,5 +165,5 @@ sub AddSpaceToString
    my $spaces = " " x ($total-$size);
    $input = $input . $spaces;
 
-   return $input;
+	 print "$input";
 }

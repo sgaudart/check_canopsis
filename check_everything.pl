@@ -110,7 +110,7 @@ sub check
 		{
     	 if ($output =~ /$expected/)
     	 {
-          PrintStringWithSpaces($suject,12) if $verbose;
+          PrintStringWithSpaces($subject,12) if $verbose;
 					PrintStringWithSpaces($label,50) if $verbose;
 					#printf("%-12s | %-50s",$subject,$label) if $verbose;
 					print color('green') if $verbose;
@@ -118,7 +118,7 @@ sub check
     	 }
     	 else
     	 {
-				  PrintStringWithSpaces($suject,12);
+				  PrintStringWithSpaces($subject,12);
 				  PrintStringWithSpaces($label,50);
 					#printf("%-12s | %-50s",$subject,$label);
 					print color('red');

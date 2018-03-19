@@ -87,8 +87,9 @@ Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-de
 
 Un exemple ici :
 
+```
 [root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis2510_ha.conf --verbose
-CANOPSIS     | Version de Canopsis
+CANOPSIS     | Version de Canopsis                              2.5.11
 CANOPSIS     | Présence du compte canopsis                      OK
 CANOPSIS     | selinux désactivé                                OK
 RABBITMQ     | Disponibilité du port 5672                       OK
@@ -103,7 +104,7 @@ WEBSERVICE   | Présence brique timeline                         OK
 ENGINES      | Disponibilité des engines                        OK
 MONGODB      | Disponibilité moteur#1                           OK
 MONGODB      | Disponibilité moteur#2                           OK
-MONGODB      | Disponibilité moteur#3                           <span style="color: #fb4141">KO</span>
+MONGODB      | Disponibilité moteur#3                           KO
 MONGODB      | Vérification etc/common/mongo_store.conf         OK
 SUPERVISOR   | Disponibilité du daemon                          OK
 SUPERVISOR   | Version                                          3.3.3
@@ -116,7 +117,7 @@ SUPERVISOR   | Controle MIDDLEWARE dans hypcontrol.conf         OK
 SUPERVISOR   | Controle FRONTEND dans hypcontrol.conf           OK
 INFLUXDB     | Disponibilité du moteur                          OK
 INFLUXDB     | Controle storage.conf                            OK
-
+```
 
 ## Utilisation
 

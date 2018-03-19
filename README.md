@@ -87,7 +87,6 @@ Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-de
 
 Un exemple ici :
 
-```console
 [root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis2510_ha.conf --verbose
 CANOPSIS     | Version de Canopsis
 CANOPSIS     | Présence du compte canopsis                      OK
@@ -117,23 +116,23 @@ SUPERVISOR   | Controle MIDDLEWARE dans hypcontrol.conf         OK
 SUPERVISOR   | Controle FRONTEND dans hypcontrol.conf           OK
 INFLUXDB     | Disponibilité du moteur                          OK
 INFLUXDB     | Controle storage.conf                            OK
-```
+
 
 ## Utilisation
 
 Pour ne voir que les tests KO :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf
+./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf]
 ```
 
 Je vois le résultat de tous les tests :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf --verbose
+./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf] --verbose
 ```
 
 Je vois le résultat de tous les tests sauf INFLUXDB :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf --verbose --skip INFLUXDB
+./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf] --verbose --skip INFLUXDB
 ```
 
 

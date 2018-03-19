@@ -57,17 +57,16 @@ print "[DEBUG] OPEN file $checkfile\n" if $debug;
 open (CHECKFD, "$checkfile") or die "Can't open file  : $checkfile\n" ; # reading
 while (<CHECKFD>)
 {
-	$line=$_;
-	chomp($line); # delete the carriage return
-	if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
-  {
+   $line=$_;
+   chomp($line); # delete the carriage return
+   if (($line ne "") && ($line !~/^#/)) # skip comment and empty line
+   {
       (@dataline) = split(',', $line); # ";" => "," changed
-			if (($skip eq "") || ($line !~ /$skip/))
-			{
-      	check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
-			}
-  }
-
+      if (($skip eq "") || ($line !~ /$skip/))
+      {
+         check($dataline[0],$dataline[1],$dataline[2],$dataline[3]);
+      }
+   }
 }
 close CHECKFD;
 
@@ -85,47 +84,43 @@ sub check
     my $label = $args[1];
     my $command = $args[2];
     my $expected = $args[3]; # verifie si $output=$expect
-		my $output;
+    my $output;
 
-		$command =~ s/(\$\w+)/$1/eeg; # eval variables
-		print "[DEBUG] command=$command\n" if $debug;
+    $command =~ s/(\$\w+)/$1/eeg; # eval variables
+    print "[DEBUG] command=$command\n" if $debug;
     if ($command =~ /check_port/)
-		{
-      $command =~ s/check_port //; # on enleve check_port
-			$output=check_port($command);
-		}
-		else
-		{
-    	$output = `$command`;
-		}
-		print "[DEBUG] output=$output\n" if $debug;
-
-		if ($expected eq "INFO")
-		{
-			# AFFICHAGE SEULEMENT DU CHECK
-			chomp($output); # delete the carriage return
-			printf("%-12s | %-35s %-10s\n",$subject,$label,$output);
-		}
+    {
+       $command =~ s/check_port //; # on enleve check_port
+       $output=check_port($command);
+    }
     else
-		{
-    	 if ($output =~ /$expected/)
-    	 {
-          PrintStringWithSpaces($subject,12) if $verbose;
-					PrintStringWithSpaces($label,50) if $verbose;
-					#printf("%-12s | %-50s",$subject,$label) if $verbose;
-					print color('green') if $verbose;
-					print "OK\n" if $verbose
-    	 }
-    	 else
-    	 {
-				  PrintStringWithSpaces($subject,12);
-				  PrintStringWithSpaces($label,50);
-					#printf("%-12s | %-50s",$subject,$label);
-					print color('red');
-					print "KO\n"
-    	 }
-			 print color('reset');
-	  }
+    {
+       $output = `$command`;
+    }
+    print "[DEBUG] output=$output\n" if $debug;
+
+    if ($expected eq "INFO")
+    {
+       # AFFICHAGE SEULEMENT DU CHECK
+       chomp($output); # delete the carriage return
+       printf("%-12s %-50s %-10s\n",$subject,$label,$output);
+    }
+    else
+    {
+       if ($output =~ /$expected/)
+       {
+          printf("%-12s %-50s",$subject,$label) if $verbose;
+          print color('green') if $verbose;
+          print "OK\n" if $verbose
+       }
+       else
+       {
+          printf("%-12s %-50s",$subject,$label);
+          print color('red');
+          print "KO\n"
+       }
+       print color('reset');
+    }
 }
 
 
@@ -155,15 +150,3 @@ sub check_port
    close $sock or die "close: $!";
 }
 
-
-sub PrintStringWithSpaces
-{
-   my $input = $_[0]; # ARG1 : string
-   my $total=  $_[1]; # ARG2 : longueur totale
-   my $size=length($input);
-
-   my $spaces = " " x ($total-$size);
-   $input = $input . $spaces;
-
-	 print "$input";
-}

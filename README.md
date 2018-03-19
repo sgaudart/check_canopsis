@@ -104,7 +104,7 @@ WEBSERVICE   | Présence brique timeline                         OK
 ENGINES      | Disponibilité des engines                        OK
 MONGODB      | Disponibilité moteur#1                           OK
 MONGODB      | Disponibilité moteur#2                           OK
-MONGODB      | Disponibilité moteur#3                           OK
+MONGODB      | Disponibilité moteur#3                           <span style="color: #fb4141">KO</span>
 MONGODB      | Vérification etc/common/mongo_store.conf         OK
 SUPERVISOR   | Disponibilité du daemon                          OK
 SUPERVISOR   | Version                                          3.3.3
@@ -123,17 +123,17 @@ INFLUXDB     | Controle storage.conf                            OK
 
 Pour ne voir que les tests KO :
 ```
-./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf
+./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf
 ```
 
 Je vois le résultat de tous les tests :
 ```
-./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf --verbose
+./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf --verbose
 ```
 
 Je vois le résultat de tous les tests sauf INFLUXDB :
 ```
-./check_everything.pl --checkfile canopsis255.conf --inventory inventory.conf --verbose --skip INFLUXDB
+./check_everything.pl --checkfile canopsis<VERSION>.conf --inventory inventory.conf --verbose --skip INFLUXDB
 ```
 
 

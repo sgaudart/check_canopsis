@@ -2,18 +2,19 @@
 
 ## Sommaire
 
-1. [Introduction](#introduction)
-2. [Objectif](#objectif)
+1.  [Introduction](#introduction)
+2.  [Objectif](#objectif)
    1. [Version](#version)
    2. [Support](#support)
    3. [Périmètre](#périmètre)
-4. [Prérequis](#prérequis)
-4. [Installation](#installation)
-5. [Configuration](#configuration)
-6. [Le résultat](#le-résultat)
-7. [Utilisation](#utilisation)
-8. [Vérification](#vérification)
-9. [Problèmes connus](#problèmes-connus)
+4.  [Prérequis](#prérequis)
+4.  [Installation](#installation)
+5.  [Configuration](#configuration)
+6.  [Le résultat](#le-résultat)
+7.  [Utilisation](#utilisation)
+8.  [Vérification](#vérification)
+9.  [Problèmes connus](#problèmes-connus)
+10. [Roadmap][#roadmap]
 
 ## Introduction
 
@@ -144,3 +145,10 @@ Quelles commandes pour vérifier si l'installation s'est bien déroulé ?
 
 ## Problèmes connus
 ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec le sujet
+
+
+## Roadmap
+
+- avoir une option --version pour afficher que les lignes taggées VERSION
+- l'option --verbose doit forcer l'affichage des lignes INFO et VERSION (et c'est tout)
+- checker le rabbitmq en local

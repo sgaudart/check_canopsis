@@ -69,7 +69,8 @@ git clone https://github.com/sgaudart/check_canopsis.git
 ## Configuration
 
 Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-dessous si nécessaire :
-- $cps_home    = "/opt/canopsis"
+- $cps_home    = "/opt/canopsis" (représente le HOME des binaires)
+- $cps_source  = "/opt/canopsis_source/canopis" (où vous avez mis les sources ?)
 
 - $amqp_vip    = "127.0.0.1" # put VIP here
 - $amqp_port   = 5672
@@ -80,7 +81,7 @@ Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-de
 - $mongo_port   = 27017
 
 - $influx_host = "influx_hostname"
-- $influx_port = 4444
+- $influx_port = 8086
 
 
 ## Le résultat

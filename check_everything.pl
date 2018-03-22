@@ -97,13 +97,19 @@ sub check
     {
        $output = `$command`;
     }
+
+    chomp($output); # delete the carriage return
     print "[DEBUG] output=$output\n" if $debug;
 
-    if ($expected eq "INFO")
+    if ($expected eq "INFO" )
     {
        # AFFICHAGE SEULEMENT DU CHECK
-       chomp($output); # delete the carriage return
-       printf("%-12s %-50s %-10s\n",$subject,$label,$output);
+       printf("%-12s %-50s %-10s\n",$subject,$label,$output) if $verbose;
+    }
+    elsif ($expected eq "VERSION")
+    {
+       # AFFICHAGE SEULEMENT DU CHECK
+       printf("%-12s %-50s %-10s\n",$subject,$label,$output) if $verbose;
     }
     else
     {
@@ -149,4 +155,3 @@ sub check_port
    }
    close $sock or die "close: $!";
 }
-

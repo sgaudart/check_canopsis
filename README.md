@@ -14,7 +14,7 @@
 7.  [Utilisation](#utilisation)
 8.  [Vérification](#vérification)
 9.  [Problèmes connus](#problèmes-connus)
-10. [Roadmap][#roadmap]
+10. [Roadmap](#roadmap)
 
 ## Introduction
 
@@ -25,10 +25,10 @@
 
 ## Objectif
 
-Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis.  
+Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis de la partie Backend (*à quand la partie Frontend ?*).  
 Le script prend en entrée 2 fichiers de configuration :
-- un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise comment a été installé canopsis (**vous devez modifier ce fichier**)
-- un fichier de checks ([cano*.conf](canopsis255.conf)) qui répertorie les vérifications à faire sur Canopsis (fourni dans ce dépot)
+- un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise où a été installé canopsis (**vous devez modifier ce fichier**)
+- un fichier de checks ([cano*.conf](canopsis255.conf)) qui définit les vérifications à faire sur Canopsis (fourni dans ce dépot)
 
 En retour, vous aurez le résultat des vérifications définies dans `canopsis*.conf`.
 
@@ -149,6 +149,7 @@ ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec
 
 ## Roadmap
 
-- avoir une option --version pour afficher que les lignes taggées VERSION
-- l'option --verbose doit forcer l'affichage des lignes INFO et VERSION (et c'est tout)
-- checker le rabbitmq en local
+- avoir une option --version pour afficher QUE les lignes taggées VERSION
+- ~~affichage des ches INFO et VERSION se fait par l'option --verbose (si pas option => pas d'affichage)~~
+- ~~checker le rabbitmq en local~~
+- trouver un moyen de checker la partie Frontend (check_http ou autres ?)

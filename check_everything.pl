@@ -104,24 +104,24 @@ sub check
     if ($expected eq "INFO" )
     {
        # AFFICHAGE SEULEMENT DU CHECK
-       printf("%-12s %-50s %-10s\n",$subject,$label,$output) if $verbose;
+       printf("%-13s %-50s %-10s\n",$subject,$label,$output) if $verbose;
     }
     elsif ($expected eq "VERSION")
     {
        # AFFICHAGE SEULEMENT DU CHECK
-       printf("%-12s %-50s %-10s\n",$subject,$label,$output) if $verbose;
+       printf("%-13s %-50s %-10s\n",$subject,$label,$output) if $verbose;
     }
     else
     {
        if ($output =~ /$expected/)
        {
-          printf("%-12s %-50s ",$subject,$label) if $verbose;
+          printf("%-13s %-50s ",$subject,$label) if $verbose;
           print color('green') if $verbose;
           print "OK\n" if $verbose
        }
        else
        {
-          printf("%-12s %-50s ",$subject,$label);
+          printf("%-13s %-50s ",$subject,$label);
           print color('red');
           print "KO\n"
        }

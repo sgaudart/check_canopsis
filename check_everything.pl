@@ -110,7 +110,8 @@ sub check
     elsif ($expected eq "VERSION")
     {
        # AFFICHAGE SEULEMENT DU CHECK
-       printf("%-13s %-50s %-10s\n",$subject,$label,$output) if $verbose;
+       if ($verbose || $version)
+       { printf("%-13s %-50s %-10s\n",$subject,$label,$output) }
     }
     else
     {

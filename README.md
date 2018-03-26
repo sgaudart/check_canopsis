@@ -153,3 +153,4 @@ ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec
 - ~~affichage des ches INFO et VERSION se fait par l'option --verbose (si pas option => pas d'affichage)~~
 - ~~checker le rabbitmq en local~~
 - trouver un moyen de checker la partie Frontend (check_http ou autres ?)
+- checker la version de MONGODB

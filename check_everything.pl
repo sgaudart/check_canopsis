@@ -36,7 +36,8 @@ GetOptions (
 "inventory=s" => \$inventory, # string
 "verbose" => \$verbose, # flag
 "debug" => \$debug, # flag
-"skip=s" => \$skip, # can skip specified checks
+"skip=s" => \$skip, # this flag can skip specified checks
+"version" => \$version, # this flag show only the version of bricks
 "help" => \$help) # flag
 or die("Error in command line arguments\n");
 

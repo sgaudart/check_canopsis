@@ -20,7 +20,7 @@ use Getopt::Long;
 use IO::Socket;
 use Term::ANSIColor;
 
-my ($verbose, $debug, $help, $line);
+my ($verbose,$debug,$help,$version,$line);
 my $skip = "";
 my $checkfile;
 my $inventory="inventory.conf";

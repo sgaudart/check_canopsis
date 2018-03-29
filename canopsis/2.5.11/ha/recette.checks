@@ -8,14 +8,14 @@ CANOPSIS,Selinux desactive,sestatus | grep disabled | wc -l,1
 
 # RABBITMQ
 RABBITMQ,Version,rpm -qa | grep rabbit | cut -c17-40,VERSION
-RABBITMQ,Dispo de la VIP,check_port $amqp_vip $amqp_port,1
-RABBITMQ,Dispo du flux en local,check_port localhost $amqp_port,1
+RABBITMQ,Dispo de la VIP,check_port $amqp_vip tcp/$amqp_port,1
+RABBITMQ,Dispo du flux en local,check_port localhost tcp/$amqp_port,1
 RABBITMQ,Verification contenu etc/amqp.conf,grep $amqp_vip $cps_home/etc/amqp.conf | wc -l,1
 
 
 # WEBSERVICE
 WEBSERVICE,Presence process webserver,ps -ef | grep webserver | grep -v grep | wc -l,[3-8]
-WEBSERVICE,Disponibilite du port 8082,check_port localhost 8082,1
+WEBSERVICE,Disponibilite du port 8082,check_port localhost tcp/8082,1
 WEBSERVICE,Presence Login dans la page,curl -s http://localhost:8082/ -m 3 | grep Login | wc -l,2
 WEBSERVICE,Detection d'erreurs dans les logs,tail -66 $cps_home/var/log/webserver.log 2>/dev/null | grep -i error | wc -l,0
 WEBSERVICE,Presence brique querybuilder,su -l canopsis -c "brickmanager list | grep querybuilder | wc -l",1
@@ -30,9 +30,9 @@ ENGINES,Disponibilite des engines,ps -ef | grep engine-launcher | wc -l,[1-2][0-
 
 # MONGODB
 MONGODB,Version,grep "db version" $cps_home/var/log/mongodb/mongodb.log 2>/dev/null | tail -1 | cut -c68-80,VERSION
-MONGODB,Dispo du moteur#1,check_port $mongo_host1 $mongo_port,1
-MONGODB,Dispo du moteur#2,check_port $mongo_host2 $mongo_port,1
-MONGODB,Dispo du moteur#3,check_port $mongo_host3 $mongo_port,1
+MONGODB,Dispo du moteur#1,check_port $mongo_host1 tcp/$mongo_port,1
+MONGODB,Dispo du moteur#2,check_port $mongo_host2 tcp/$mongo_port,1
+MONGODB,Dispo du moteur#3,check_port $mongo_host3 tcp/$mongo_port,1
 MONGODB,Verification host dans mongo_store.conf,grep $mongo_hosts $cps_home/etc/common/mongo_store.conf 2>/dev/null | wc -l,1
 MONGODB,Verification replicaset dans mongo_store.conf,grep replicaset $cps_home/etc/common/mongo_store.conf 2>/dev/null | wc -l,1
 
@@ -50,6 +50,7 @@ SUPERVISOR,Controle FRONTEND dans hypcontrol.conf,grep "FRONTEND=(webserver)" $c
 
 
 # INFLUXDB
-INFLUXDB,Dispo du moteur,check_port $influx_host $influx_port,1
+INFLUXDB,Dispo du moteur,check_port $influx_host tcp/8086,1
 INFLUXDB,Controle host storage.conf,grep $influx_host $cps_home/etc/influx/storage.conf | wc -l,1
 INFLUXDB,Controle port storage.conf,grep $influx_port $cps_home/etc/influx/storage.conf | wc -l,1
+INFLUXDB,Controle database storage.conf,grep database $cps_home/etc/influx/storage.conf | wc -l,1

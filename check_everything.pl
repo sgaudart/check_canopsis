@@ -137,13 +137,16 @@ sub check_port
    my(@args) = @_;
    my @datacheckport;
    (@datacheckport) = split(' ', $args[0]);
+
    my $host = $datacheckport[0];
-   my $port = $datacheckport[1];
+   my $flux = $datacheckport[1];
+
+   my ($proto,$port)=split('/',$flux);
 
    my $sock = IO::Socket::INET->new(
       PeerAddr => $host,
       PeerPort => $port,
-      Proto    => 'tcp',
+      Proto    => '$proto',
       Timeout  => 3
    );
 

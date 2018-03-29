@@ -48,6 +48,6 @@ SUPERVISOR,Controle MIDDLEWARE dans hypcontrol.conf,grep "MIDDLEWARE=(amqp2engin
 SUPERVISOR,Controle FRONTEND dans hypcontrol.conf,grep "FRONTEND=(webserver)" $cps_home/etc/hypcontrol.conf 2>/dev/null | wc -l,1
 
 # INFLUXDB
-INFLUXDB,Dispo du moteur,check_port $influx_host $influx_port,1
+INFLUXDB,Dispo du moteur,check_port $influx_host 8086,1
 INFLUXDB,Controle storage.conf,grep $influx_host $cps_home/etc/influx/storage.conf | wc -l,1
 INFLUXDB,Controle port storage.conf,grep $influx_port $cps_home/etc/influx/storage.conf | wc -l,1

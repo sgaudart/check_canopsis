@@ -146,7 +146,7 @@ sub check_port
    my $sock = IO::Socket::INET->new(
       PeerAddr => $host,
       PeerPort => $port,
-      Proto    => '$proto',
+      Proto    => $proto,
       Timeout  => 3
    );
 

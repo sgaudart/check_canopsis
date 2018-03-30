@@ -53,4 +53,4 @@ SUPERVISOR,Controle FRONTEND dans hypcontrol.conf,grep "FRONTEND=(webserver)" $c
 INFLUXDB,Dispo du moteur,check_port $influx_host tcp/8086,1
 INFLUXDB,Controle host storage.conf,grep $influx_host $cps_home/etc/influx/storage.conf | wc -l,1
 INFLUXDB,Controle port storage.conf,grep $influx_port $cps_home/etc/influx/storage.conf | wc -l,1
-INFLUXDB,Controle database storage.conf,grep database $cps_home/etc/influx/storage.conf | wc -l,1
+INFLUXDB,Controle database storage.conf,grep "db = canopsis" $cps_home/etc/influx/storage.conf | wc -l,1

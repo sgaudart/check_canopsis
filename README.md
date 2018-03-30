@@ -28,14 +28,14 @@
 Le script `check_everything.pl` permet de vérifier la bonne installation et disponiblité de Canopsis de la partie Backend (*à quand la partie Frontend ?*).  
 Le script prend en entrée 2 fichiers de configuration :
 - un fichier d'inventaire ([inventory.conf](inventory.conf)) qui précise où a été installé canopsis (**vous devez modifier ce fichier**)
-- un fichier de checks ([cano*.conf](canopsis255.conf)) qui définit les vérifications à faire sur Canopsis (fourni dans ce dépot)
+- un fichier de *checks* ([canopsis/<VERSION>/recette.checks](canopsis/2.5.11/ha/recette.checks)) qui définit les vérifications à faire sur Canopsis (fourni dans ce dépot)
 
 En retour, vous aurez le résultat des vérifications définies dans `canopsis*.conf`.
 
 
 ### Version
 
-Testé avec Canopsis 2.4.X et 2.5.X sur du CentOS7.
+Testé avec Canopsis 2.4.X et 2.5.X sur **du CentOS7.**
 
 
 ### Support
@@ -70,27 +70,28 @@ git clone https://github.com/sgaudart/check_canopsis.git
 ## Configuration
 
 Il vous faut éditer le fichier `inventory.conf`, et changer les variables ci-dessous si nécessaire :
-- $cps_home    = "/opt/canopsis" (représente le HOME des binaires)
-- $cps_source  = "/opt/canopsis_source/canopis" (où vous avez mis les sources ?)
+```
+$cps_home    = "/opt/canopsis" (représente le HOME des binaires)
+$cps_source  = "/opt/canopsis_source/canopis" (où sont les sources ?) # si install par build
 
-- $amqp_vip    = "127.0.0.1" # put VIP here
-- $amqp_port   = 5672
+$amqp_vip    = "127.0.0.1" # put VIP here
+$amqp_port   = 5672
 
-- $mongo_host1 = "mongo1"
-- $mongo_host2 = "mongo2" # si cluster mongo
-- $mongo_host3 = "mongo3" # si cluster mongo
-- $mongo_port   = 27017
+$mongo_host1 = "mongo1"
+$mongo_host2 = "mongo2" # si cluster mongo
+$mongo_host3 = "mongo3" # si cluster mongo
+$mongo_port   = 27017
 
-- $influx_host = "influx_hostname"
-- $influx_port = 8086
-
+$influx_host = "influx_hostname"
+$influx_port = 4444
+```
 
 ## Le résultat
 
 Un exemple ici :
 
 ```
-[root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis2510_ha.conf --verbose
+[root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis/2.5.11/ha/recette.checks --verbose
 CANOPSIS     | Version de Canopsis                              2.5.11
 CANOPSIS     | Présence du compte canopsis                      OK
 CANOPSIS     | selinux désactivé                                OK

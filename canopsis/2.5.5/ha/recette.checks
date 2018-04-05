@@ -28,6 +28,7 @@ ENGINES,Dispo des engines,ps -ef | grep engine-launcher | wc -l,[1-2][0-9]
 
 
 # MONGODB
+MONGODB,Version,su -l canopsis -c "python -c \"from pymongo import MongoClient; client = MongoClient('mongodb://$mongo_host1:$mongo_port'); print client.server_info()['version']\"",VERSION
 MONGODB,Dispo du moteur#1,check_port $mongo_host1 $mongo_port,1
 MONGODB,Dispo du moteur#2,check_port $mongo_host2 $mongo_port,1
 MONGODB,Dispo du moteur#3,check_port $mongo_host3 $mongo_port,1

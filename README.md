@@ -150,8 +150,8 @@ ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec
 
 ## Roadmap
 
-- avoir une option --version pour afficher QUE les lignes taggées VERSION
-- ~~affichage des ches INFO et VERSION se fait par l'option --verbose (si pas option => pas d'affichage)~~
+- fonctionnalité include dans les fichiers de checks
+- ~~affichage des checks INFO et VERSION se fait par l'option --verbose (si pas option => pas d'affichage)~~
 - ~~checker le rabbitmq en local~~
 - trouver un moyen de checker la partie Frontend (check_http ou autres ?)
 - améliorer le check pour la version de MONGODB

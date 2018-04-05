@@ -29,7 +29,7 @@ ENGINES,Disponibilite des engines,ps -ef | grep engine-launcher | wc -l,[1-2][0-
 
 
 # MONGODB
-MONGODB,Version,grep "db version" $cps_home/var/log/mongodb/mongodb.log 2>/dev/null | tail -1 | cut -c68-80,VERSION
+MONGODB,Version,su -l canopsis -c "python -c \"from pymongo import MongoClient; client = MongoClient('mongodb://$mongo_host1:$mongo_port'); print client.server_info()['version']\"",VERSION
 MONGODB,Dispo du moteur#1,check_port $mongo_host1 tcp/$mongo_port,1
 MONGODB,Dispo du moteur#2,check_port $mongo_host2 tcp/$mongo_port,1
 MONGODB,Dispo du moteur#3,check_port $mongo_host3 tcp/$mongo_port,1

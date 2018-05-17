@@ -9,6 +9,7 @@ ENGINES,Presence section snmp,grep "engine:snmp" $cps_home/etc/amqp2engines.conf
 ENGINES,Presence section datametrie,grep "engine:datametrie" $cps_home/etc/amqp2engines.conf | wc -l,1
 ENGINES,Presence erreur dans snmp.log,tail -66 $cps_home/var/log/engines/snmp.log 2>/dev/null | grep -i error | wc -l,0
 ENGINES,Presence engine snmp,ps -ef | grep engine-launcher | grep python | grep snmp | grep -v grep | wc -l,1
+ENGINES,Detection d'erreurs log datametrie,tail -66 $cps_home/var/log/engines/datametrie.log 2>/dev/null | grep -i error | wc -l,0
 ENGINES,Presence engine datametrie,ps -ef | grep engine-launcher | grep python | grep datametrie | grep -v grep | wc -l,1
 
 

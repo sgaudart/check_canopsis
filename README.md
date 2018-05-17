@@ -91,52 +91,52 @@ $influx_port = 4444
 Un exemple ici :
 
 ```
-[root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis/2.5.11/ha/recette.checks --verbose
-CANOPSIS     | Version de Canopsis                              2.5.11
-CANOPSIS     | Présence du compte canopsis                      OK
-CANOPSIS     | selinux désactivé                                OK
-RABBITMQ     | Disponibilité du port 5672                       OK
-RABIITMQ     | Vérification contenu etc/amqp.conf               OK
-WEBSERVICE   | Disponibilité du port 8082                       OK
-WEBSERVICE   | Présence Login dans la page                      OK
-WEBSERVICE   | Détection d'erreurs dans les logs                OK
-WEBSERVICE   | Présence brique querybuilder                     OK
-WEBSERVICE   | Présence brique weather                          OK
-WEBSERVICE   | Présence brique listalarm                        OK
-WEBSERVICE   | Présence brique timeline                         OK
-ENGINES      | Disponibilité des engines                        OK
-MONGODB      | Disponibilité moteur#1                           OK
-MONGODB      | Disponibilité moteur#2                           OK
-MONGODB      | Disponibilité moteur#3                           KO
-MONGODB      | Vérification etc/common/mongo_store.conf         OK
-SUPERVISOR   | Disponibilité du daemon                          OK
-SUPERVISOR   | Version                                          3.3.3
-SUPERVISOR   | Fichiers dans etc/supervisor.d/                  OK
-SUPERVISOR   | Présence cleaner dans amqp2engines.conf          OK
-SUPERVISOR   | Présence filter dans amqp2engines.conf           OK
-SUPERVISOR   | Présence schedule dans amqp2engines.conf         OK
-SUPERVISOR   | Controle BACKEND dans hypcontrol.conf            OK
-SUPERVISOR   | Controle MIDDLEWARE dans hypcontrol.conf         OK
-SUPERVISOR   | Controle FRONTEND dans hypcontrol.conf           OK
-INFLUXDB     | Disponibilité du moteur                          OK
-INFLUXDB     | Controle storage.conf                            OK
+[root@cano1 check_canopsis]# ./check_everything.pl --checkfile canopsis/2.5.13/recette_ha.checks --verbose
+CANOPSIS      Version de Canopsis                              2.5.11
+CANOPSIS      Présence du compte canopsis                      OK
+CANOPSIS      selinux désactivé                                OK
+RABBITMQ      Disponibilité du port 5672                       OK
+RABIITMQ      Vérification contenu etc/amqp.conf               OK
+WEBSERVICE    Disponibilité du port 8082                       OK
+WEBSERVICE    Présence Login dans la page                      OK
+WEBSERVICE    Détection d'erreurs dans les logs                OK
+WEBSERVICE    Présence brique querybuilder                     OK
+WEBSERVICE    Présence brique weather                          OK
+WEBSERVICE    Présence brique listalarm                        OK
+WEBSERVICE    Présence brique timeline                         OK
+ENGINES       Disponibilité des engines                        OK
+MONGODB       Disponibilité moteur#1                           OK
+MONGODB       Disponibilité moteur#2                           OK
+MONGODB       Disponibilité moteur#3                           KO
+MONGODB       Vérification etc/common/mongo_store.conf         OK
+SUPERVISOR    Disponibilité du daemon                          OK
+SUPERVISOR    Version                                          3.3.3
+SUPERVISOR    Fichiers dans etc/supervisor.d/                  OK
+SUPERVISOR    Présence cleaner dans amqp2engines.conf          OK
+SUPERVISOR    Présence filter dans amqp2engines.conf           OK
+SUPERVISOR    Présence schedule dans amqp2engines.conf         OK
+SUPERVISOR    Controle BACKEND dans hypcontrol.conf            OK
+SUPERVISOR    Controle MIDDLEWARE dans hypcontrol.conf         OK
+SUPERVISOR    Controle FRONTEND dans hypcontrol.conf           OK
+INFLUXDB      Disponibilité du moteur                          OK
+INFLUXDB      Controle storage.conf                            OK
 ```
 
 ## Utilisation
 
-Pour ne voir que les tests KO :
+Pour ne voir QUE les tests KO :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf]
+./check_everything.pl --checkfile canopsis/<VERSION>/recette_*.conf [--inventory inventory.conf]
 ```
 
 Je vois le résultat de tous les tests :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf] --verbose
+./check_everything.pl --checkfile canopsis/<VERSION>/recette_*.conf [--inventory inventory.conf] --verbose
 ```
 
 Je vois le résultat de tous les tests sauf INFLUXDB :
 ```
-./check_everything.pl --checkfile canopsis<VERSION>.conf [--inventory inventory.conf] --verbose --skip INFLUXDB
+./check_everything.pl --checkfile canopsis/<VERSION>/recette_*.conf [--inventory inventory.conf] --verbose --skip INFLUXDB
 ```
 
 
@@ -154,5 +154,5 @@ ici les problèmes rencontrés potentiels + numéro de ticket/issue en lien avec
 - ~~affichage des checks INFO et VERSION se fait par l'option --verbose (si pas option => pas d'affichage)~~
 - ~~checker le rabbitmq en local~~
 - trouver un moyen de checker la partie Frontend (check_http ou autres ?)
-- améliorer le check pour la version de MONGODB
+- ~~améliorer le check pour la version de MONGODB~~
 - ajout option --help => explications

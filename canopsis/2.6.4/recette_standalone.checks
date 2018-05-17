@@ -1,0 +1,45 @@
+# CONFIGURATION POUR TESTER LA BONNE INSTALLATION DE CANOPSIS ARCHI HA
+
+# CANOPSIS
+CANOPSIS,Version de Canopsis,rpm -qa | grep cano | cut -c14-40,VERSION
+CANOPSIS,Presence du compte canopsis,grep cano /etc/passwd | wc -l,1
+CANOPSIS,Selinux desactive,sestatus | grep disabled | wc -l,1
+
+
+# RABBITMQ
+RABBITMQ,Version,rpm -qa | grep rabbit | cut -c17-40,VERSION
+RABBITMQ,Dispo de la VIP,check_port $amqp_vip tcp/$amqp_port,1
+RABBITMQ,Dispo du flux en local,check_port localhost tcp/$amqp_port,1
+RABBITMQ,Verification contenu etc/amqp.conf,grep $amqp_vip $cps_home/etc/amqp.conf | wc -l,1
+
+
+# WEBSERVICE
+WEBSERVICE,Presence process webserver,ps -ef | grep webserver | grep -v grep | wc -l,[2-5]
+WEBSERVICE,Disponibilite du port 8082,check_port localhost tcp/8082,1
+WEBSERVICE,Presence Login dans la page,curl -s http://localhost:8082/ -m 3 | grep Login | wc -l,2
+WEBSERVICE,Detection d'erreurs dans les logs,tail -66 $cps_home/var/log/webserver.log 2>/dev/null | grep -i error | wc -l,0
+WEBSERVICE,Presence brique querybuilder,su -l canopsis -c "brickmanager list 2>/dev/null | grep querybuilder | wc -l",1
+WEBSERVICE,Presence brique weather,su -l canopsis -c "brickmanager list 2>/dev/null | grep weather | wc -l",1
+WEBSERVICE,Presence brique listalarm,su -l canopsis -c "brickmanager list 2>/dev/null | grep listalarm | wc -l",1
+WEBSERVICE,Presence brique timeline,su -l canopsis -c "brickmanager list 2>/dev/null | grep timeline | wc -l",1
+
+
+# ENGINES
+ENGINES,Presence config des engines via systemd,find /etc/systemd -name "cano*" | wc -l,1[5-9]
+ENGINES,Detection d'erreurs au lancement,$cps_home/bin/canopsis-systemd status | grep -i error | wc -l,0
+ENGINES,Dispo des engines,ps -ef | grep engine-launcher | grep python | wc -l,1[5-9]
+ENGINES,Dispo des engine-launcher-systemd,ps -ef | grep engine-launcher-systemd | grep -v grep | wc -l,1[5-9]
+
+
+# MONGODB
+MONGODB,Version,su -l canopsis -c "python -c \"from pymongo import MongoClient; client = MongoClient('mongodb://$mongo_host1:$mongo_port'); print client.server_info()['version']\"",VERSION
+MONGODB,Dispo du moteur#1,check_port $mongo_host1 tcp/$mongo_port,1
+MONGODB,Verification host dans mongo_store.conf,grep $mongo_hosts $cps_home/etc/common/mongo_store.conf 2>/dev/null | wc -l,1
+
+
+# INFLUXDB
+INFLUXDB,Dispo du moteur en tcp,check_port $influx_host tcp/8086,1
+INFLUXDB,Dispo du moteur en udp,check_port $influx_host udp/$influx_port,1
+INFLUXDB,Controle host storage.conf,grep $influx_host $cps_home/etc/influx/storage.conf | wc -l,1
+INFLUXDB,Controle port storage.conf,grep $influx_port $cps_home/etc/influx/storage.conf | wc -l,1
+INFLUXDB,Controle database storage.conf,grep "db = canopsis" $cps_home/etc/influx/storage.conf | wc -l,1

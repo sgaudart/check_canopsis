@@ -21,7 +21,7 @@
 - auteur : sgaudart@capensis.fr
 - date : 05/03/2018
 
-[Canopsis](http://www.canopsis.com/) est un hyperviseur édité par la société [Capensis](https://www.capensis.fr/).
+[Canopsis](http://www.canopsis.com/) est un hyperviseur (au sens supervision du terme) édité par la société [Capensis](https://www.capensis.fr/).
 
 ## Objectif
 

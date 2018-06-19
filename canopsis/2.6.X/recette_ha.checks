@@ -27,7 +27,7 @@ WEBSERVICE,Detection d'erreurs dans les logs,tail -66 $cps_home/var/log/webserve
 
 # ENGINES
 ENGINES,Presence config des engines via systemd,find /etc/systemd -name "cano*" | wc -l,1[5-9]
-ENGINES,Detection d'erreurs au lancement,$cps_home/bin/canopsis-systemd status | grep since | grep -v running | wc -l,0
+ENGINES,Detection d'erreurs au lancement,$cps_home/bin/canopsis-systemd status | grep ago | grep -v running | wc -l,0
 ENGINES,Dispo des engines,ps -ef | grep engine-launcher | grep python | wc -l,1[5-9]
 ENGINES,Dispo des engine-launcher-systemd,ps -ef | grep engine-launcher-systemd | grep -v grep | wc -l,1[5-9]
 

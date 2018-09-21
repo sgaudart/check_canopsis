@@ -11,7 +11,7 @@ RABBITMQ,Version,rpm -qa | grep rabbit | cut -c17-40,VERSION
 RABBITMQ,Dispo de la VIP,check_port $amqp_vip tcp/$amqp_port,1
 RABBITMQ,Dispo du flux en local,check_port localhost tcp/$amqp_port,1
 RABBITMQ,Verification contenu etc/amqp.conf,grep $amqp_vip $cps_home/etc/amqp.conf | wc -l,1
-
+RABBITMQ,Verification de la saturation des queues,rabbitmqctl list_queues -p canopsis messages | grep -E '^[0-9]{5}' | wc -l,0
 
 # WEBSERVICE
 WEBSERVICE,Presence process webserver,ps -ef | grep webserver | grep -v grep | wc -l,[2-5]
